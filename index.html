@@ -435,7 +435,9 @@
     </footer>
   </div>
 
-  <script>
+  <script type="module">
+    import { SpeedInsights } from "@vercel/speed-insights/react";
+    
     const introWrapper = document.getElementById("introWrapper");
     const introVideo = document.getElementById("introVideo");
 
@@ -525,8 +527,6 @@
         navbar.classList.remove('scrolled');
       }
     });
-
-    import { SpeedInsights } from "@vercel/speed-insights/react"
   </script>
 </body>
 </html>
