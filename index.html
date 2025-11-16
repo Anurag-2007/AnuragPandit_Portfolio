@@ -317,20 +317,6 @@
       transition: opacity 0.4s ease;
     }
 
-    .skip-text {
-      position: absolute;
-      bottom: 30px;
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.9em;
-      z-index: 10000;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 1; }
-    }
-
     @media (max-width: 768px) {
       nav {
         flex-direction: column;
@@ -442,6 +428,15 @@
     const introWrapper = document.getElementById("introWrapper");
     const introVideo = document.getElementById("introVideo");
 
+    // Function to hide intro
+    function hideIntro() {
+      introWrapper.classList.add("hide");
+      setTimeout(() => {
+        introWrapper.style.display = "none";
+        document.body.style.overflow = "auto";
+      }, 800);
+    }
+
     // Skip intro on mobile/slow connections
     if (window.innerWidth < 768 || (navigator.connection && (navigator.connection.effectiveType === '2g' || navigator.connection.saveData))) {
       introWrapper.style.display = "none";
@@ -449,30 +444,39 @@
     } else {
       document.body.style.overflow = "hidden";
 
-      // Auto-hide after 5 seconds if video doesn't load
-      const fallbackTimer = setTimeout(() => {
-        if (!introVideo.ended) {
-          introWrapper.classList.add("hide");
-          setTimeout(() => {
-            introWrapper.style.display = "none";
-            document.body.style.overflow = "auto";
-          }, 800);
+      // Check if video can load - hide after 2 seconds if not
+      const quickCheck = setTimeout(() => {
+        if (introVideo.readyState === 0) {
+          console.log('Video failed to load - skipping intro');
+          introWrapper.style.display = "none";
+          document.body.style.overflow = "auto";
         }
+      }, 2000);
+
+      // Auto-hide after 5 seconds maximum
+      const fallbackTimer = setTimeout(() => {
+        clearTimeout(quickCheck);
+        hideIntro();
       }, 5000);
+
+      // Video loaded successfully
+      introVideo.addEventListener('loadeddata', () => {
+        clearTimeout(quickCheck);
+        console.log('Video loaded successfully');
+      });
 
       // Video ended handler
       introVideo.onended = () => {
         clearTimeout(fallbackTimer);
-        introWrapper.classList.add("hide");
-        setTimeout(() => {
-          introWrapper.style.display = "none";
-          document.body.style.overflow = "auto";
-        }, 800);
+        clearTimeout(quickCheck);
+        hideIntro();
       };
 
-      // Handle video errors
+      // Handle video errors - immediately skip
       introVideo.onerror = () => {
         clearTimeout(fallbackTimer);
+        clearTimeout(quickCheck);
+        console.log('Video error - skipping intro');
         introWrapper.style.display = "none";
         document.body.style.overflow = "auto";
       };
@@ -480,11 +484,7 @@
 
     // Skip intro on click/tap
     introWrapper.addEventListener('click', () => {
-      introWrapper.classList.add("hide");
-      setTimeout(() => {
-        introWrapper.style.display = "none";
-        document.body.style.overflow = "auto";
-      }, 400);
+      hideIntro();
     });
 
     // Navbar scroll effect
