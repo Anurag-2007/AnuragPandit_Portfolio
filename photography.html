@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photography — Anurag Pandit</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #000000, #251515, #000000);
+      min-height: 100vh;
+      color: white;
+    }
+
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      backdrop-filter: blur(30px);
+      background: rgba(227, 214, 214, 0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .nav-logo {
+      font-size: 1.6em;
+      font-weight: bold;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+    }
+
+    /* PAGE CONTENT */
+    .container {
+      max-width: 1200px;
+      margin: 140px auto 60px;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 50px;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .photo {
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: zoom-in;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* LIGHTBOX */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(15px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 99999;
+      cursor: zoom-out;
+    }
+
+    #lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 16px;
+      transform: scale(0.85);
+      filter: blur(10px);
+      transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.45s ease;
+    }
+
+    #lightbox.active img {
+      transform: scale(1);
+      filter: blur(0);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<nav>
+  <div class="nav-logo">Anurag's Portfolio</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="photography.html">Photography</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>My Photography 📸</h1>
+  <p class="subtitle">Random moments I capture when words aren’t enough.</p>
+
+  <div class="gallery">
+    <!-- PHOTOS -->
+    <!-- You can keep adding images here -->
+    <div class="photo"><img src="photography/1 (1).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (2).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (3).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (4).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (5).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (6).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (7).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (8).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (9).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (10).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (11).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (12).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (13).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (14).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (15).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (16).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (17).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (18).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (19).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (20).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (21).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (22).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (23).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (24).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (25).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (26).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (27).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (28).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (29).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (30).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (31).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (32).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (33).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (34).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (35).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (36).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (37).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (38).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (39).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (40).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (41).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (42).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (43).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (44).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (45).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (46).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (47).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (48).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (49).jpg" loading="lazy"></div>
+    <div class="photo"><img src="photography/1 (50).jpg" loading="lazy"></div>
+  </div>
+</div>
+
+<footer>
+  © 2025 Anurag A. Pandit • <a href="index.html">Back to Home</a>
+</footer>
+
+<script>
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+
+  document.querySelectorAll(".photo img").forEach(img => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  lightbox.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "auto";
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") {
+      lightbox.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+  });
+</script>
+
+</body>
+</html>
