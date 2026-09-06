@@ -33,6 +33,14 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section ref={heroRef} className="relative w-full min-h-screen flex flex-col justify-between items-center overflow-hidden pt-28 pb-10" id="home">
       <VideoBackground src={HLS_URL} overlayClasses="bg-black/20" />
@@ -75,6 +83,7 @@ export default function Hero() {
         <div className="blur-in inline-flex gap-4">
           <a 
             href="#work" 
+            onClick={(e) => handleScrollTo(e, 'work')}
             className="group relative rounded-full text-xs sm:text-sm px-6 py-2.5 bg-text-primary text-bg hover:bg-bg hover:text-text-primary transition-all hover:scale-105 inline-flex items-center justify-center font-medium"
           >
             <span className="absolute inset-[-2px] rounded-full accent-gradient opacity-0 group-hover:opacity-100 -z-10" />
@@ -82,6 +91,7 @@ export default function Hero() {
           </a>
           <a 
             href="#contact" 
+            onClick={(e) => handleScrollTo(e, 'contact')}
             className="group relative rounded-full text-xs sm:text-sm px-6 py-2.5 border-2 border-stroke bg-bg text-text-primary hover:border-transparent transition-all hover:scale-105 inline-flex items-center justify-center font-medium"
           >
              <span className="absolute inset-[-2px] rounded-full accent-gradient opacity-0 group-hover:opacity-100 -z-10" />
