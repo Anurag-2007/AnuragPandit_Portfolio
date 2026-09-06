@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
+import { motion, AnimatePresence } from 'framer-motion';
 import VideoBackground from './VideoBackground';
 
 const roles = ["Fullstack Developer", "Creative", "Engineer"];
@@ -12,7 +13,7 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 2000);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
@@ -47,8 +48,24 @@ export default function Hero() {
           Anurag A Pandit
         </h1>
         
-        <p className="blur-in text-lg md:text-xl font-body text-text-primary mb-3 flex items-center gap-2">
-          A <span key={roleIndex} className="font-display italic text-text-primary animate-role-fade-in inline-block">{roles[roleIndex]}</span> in building.
+        {/* Dynamically fitting inline wrapper with flex layout to eliminate excess spacing */}
+        <p className="blur-in text-lg md:text-xl font-body text-text-primary mb-3 inline-flex items-center justify-center gap-[0.3em] flex-wrap">
+          <span>A</span>
+          <span className="inline-flex relative overflow-hidden h-[1.4em] items-center">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={roleIndex}
+                initial={{ y: 15, opacity: 0, filter: "blur(4px)" }}
+                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                exit={{ y: -15, opacity: 0, filter: "blur(4px)" }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="font-display italic text-[#89AACC] whitespace-nowrap inline-block"
+              >
+                {roles[roleIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+          <span>in building.</span>
         </p>
         
         <p className="blur-in text-xs md:text-sm text-muted max-w-md mb-6 leading-relaxed">
