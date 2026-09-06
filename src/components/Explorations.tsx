@@ -8,8 +8,8 @@ const techCategories = [
   {
     title: "Languages & Core",
     subtitle: "Foundation",
-    gradient: "from-blue-600/20 to-cyan-600/20",
-    borderGlow: "group-hover:border-blue-500/40",
+    accent: "hover:border-blue-500/60 hover:shadow-[0_0_35px_rgba(59,130,246,0.25)]",
+    dotColor: "bg-blue-400 shadow-[0_0_10px_#60a5fa]",
     skills: [
       { name: "C++", icon: "cplusplus" },
       { name: "C", icon: "c" },
@@ -22,8 +22,8 @@ const techCategories = [
   {
     title: "Frontend & Mobile",
     subtitle: "Interfaces",
-    gradient: "from-purple-600/20 to-pink-600/20",
-    borderGlow: "group-hover:border-purple-500/40",
+    accent: "hover:border-purple-500/60 hover:shadow-[0_0_35px_rgba(168,85,247,0.25)]",
+    dotColor: "bg-purple-400 shadow-[0_0_10px_#c084fc]",
     skills: [
       { name: "React", icon: "react" },
       { name: "Next.js", icon: "nextdotjs" },
@@ -35,8 +35,8 @@ const techCategories = [
   {
     title: "Backend & Systems",
     subtitle: "Architecture",
-    gradient: "from-emerald-600/20 to-teal-600/20",
-    borderGlow: "group-hover:border-emerald-500/40",
+    accent: "hover:border-emerald-500/60 hover:shadow-[0_0_35px_rgba(16,185,129,0.25)]",
+    dotColor: "bg-emerald-400 shadow-[0_0_10px_#34d399]",
     skills: [
       { name: "Node.js", icon: "nodedotjs" },
       { name: "Express.js", icon: "express" },
@@ -47,8 +47,8 @@ const techCategories = [
   {
     title: "Databases",
     subtitle: "Storage",
-    gradient: "from-amber-600/20 to-orange-600/20",
-    borderGlow: "group-hover:border-amber-500/40",
+    accent: "hover:border-amber-500/60 hover:shadow-[0_0_35px_rgba(245,158,11,0.25)]",
+    dotColor: "bg-amber-400 shadow-[0_0_10px_#fbbf24]",
     skills: [
       { name: "MongoDB", icon: "mongodb" },
       { name: "MySQL", icon: "mysql" },
@@ -59,8 +59,8 @@ const techCategories = [
   {
     title: "AI, ML & Vision",
     subtitle: "Intelligence",
-    gradient: "from-indigo-600/20 to-violet-600/20",
-    borderGlow: "group-hover:border-indigo-500/40",
+    accent: "hover:border-indigo-500/60 hover:shadow-[0_0_35px_rgba(99,102,241,0.25)]",
+    dotColor: "bg-indigo-400 shadow-[0_0_10px_#818cf8]",
     skills: [
       { name: "TensorFlow", icon: "tensorflow" },
       { name: "MediaPipe", icon: "google" }, 
@@ -73,8 +73,8 @@ const techCategories = [
   {
     title: "Design & Tools",
     subtitle: "Workflow",
-    gradient: "from-rose-600/20 to-red-600/20",
-    borderGlow: "group-hover:border-rose-500/40",
+    accent: "hover:border-rose-500/60 hover:shadow-[0_0_35px_rgba(244,63,94,0.25)]",
+    dotColor: "bg-rose-400 shadow-[0_0_10px_#fb7185]",
     skills: [
       { name: "Figma", icon: "figma" },
       { name: "Canva", url: "https://api.iconify.design/simple-icons:canva.svg?color=%23e5e5e5" },
@@ -88,101 +88,158 @@ const techCategories = [
 ];
 
 export default function Explorations() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "+=1200",
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
+      // 1. Header Reveal Animation
+      gsap.fromTo(headerRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
         }
-      });
-
-      // Phase 1: Header fades and locks gracefully into the center view
-      tl.fromTo(headerRef.current, 
-        { opacity: 0, scale: 0.95, y: 20 },
-        { opacity: 0.5, scale: 1, y: 0, duration: 0.6, ease: "power3.out" }
-      )
-      
-      // Phase 2: As cards enter and rise up, header completely disappears (opacity 0)
-      .to(headerRef.current, { opacity: 0, scale: 1.05, y: -30, duration: 0.6 }, "+=0.1")
-
-      // Phase 3: High-visibility glassmorphism cards float cleanly over into position
-      .fromTo(gridRef.current,
-        { y: "90vh", opacity: 0 },
-        { y: "-52vh", opacity: 1, duration: 1.6, ease: "power2.out" },
-        "<" // Starts alongside the header fade-out for a seamless transition
       );
 
-    }, containerRef);
+      // 2. Uniform Stagger Reveal for Cards
+      const cards = cardsRef.current?.children || [];
+      
+      gsap.fromTo(cards,
+        { 
+          opacity: 0, 
+          y: 50,
+          scale: 0.95,
+          filter: "blur(10px)"
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: "blur(0px)",
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+    }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  // 3D Magnetic Mouse Tilt Handlers
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    gsap.to(card, {
+      rotateX: rotateX,
+      rotateY: rotateY,
+      transformPerspective: 1000,
+      ease: "power2.out",
+      duration: 0.3
+    });
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      ease: "power3.out",
+      duration: 0.6
+    });
+  };
+
   return (
     <section 
-      ref={containerRef} 
-      className="relative bg-bg h-screen w-full overflow-hidden flex items-center justify-center" 
+      ref={sectionRef} 
+      className="relative bg-bg py-24 sm:py-32 px-4 sm:px-6 overflow-hidden flex flex-col items-center justify-center w-full" 
       id="explorations"
     >
-      {/* Background Watermark Text Matrix (Fades away completely on scroll) */}
-      <div 
-        ref={headerRef} 
-        className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none will-change-[opacity,transform]"
-      >
-        <div className="w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center">
-          <span className="text-[11px] text-[#89AACC] uppercase tracking-[0.35em] mb-4 block font-medium opacity-80">
-            Tech Ecosystem
-          </span>
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-body leading-[1.1] text-center w-full text-text-primary/70">
-            Crafted with <span className="font-display italic text-[#89AACC]">precision</span>
-          </h2>
-          <p className="mt-4 md:mt-5 text-muted/70 max-w-lg mx-auto text-xs sm:text-sm md:text-base leading-relaxed text-center">
-            A comprehensive matrix of languages, frameworks, and modern tools I leverage to build scalable systems.
-          </p>
-        </div>
+      {/* Radial Background Accent */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(137,170,204,0.08)_0%,transparent_60%)] pointer-events-none" />
+
+      {/* Header */}
+      <div ref={headerRef} className="max-w-2xl mx-auto text-center mb-12 sm:mb-16 relative z-10 px-2 will-change-transform">
+        <span className="text-[10px] sm:text-[11px] text-[#89AACC] uppercase tracking-[0.35em] mb-3 block font-semibold">
+          Tech Ecosystem
+        </span>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-body leading-[1.1] text-text-primary">
+          Crafted with <span className="font-display italic text-[#89AACC]">precision</span>
+        </h2>
+        <p className="mt-3 sm:mt-4 text-muted text-xs sm:text-sm md:text-base leading-relaxed max-w-lg mx-auto">
+          A comprehensive matrix of languages, frameworks, and modern tools leveraged for scalable architecture.
+        </p>
       </div>
 
-      {/* Highly Visible Glassmorphism Cards Grid */}
+      {/* Perfectly Aligned Glassmorphic Grid */}
       <div 
-        ref={gridRef}
-        className="absolute z-20 w-full max-w-[1280px] px-6 grid grid-cols-1 md:grid-cols-3 gap-6 pointer-events-auto will-change-transform"
+        ref={cardsRef}
+        className="relative z-20 w-full max-w-[1240px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-stretch"
       >
         {techCategories.map((cat, i) => (
           <div 
             key={i} 
-            className={`w-full p-6 rounded-2xl bg-surface/85 backdrop-blur-3xl border border-white/20 ${cat.borderGlow} hover:border-[#89AACC]/60 hover:-translate-y-1.5 transition-all duration-500 cursor-pointer shadow-[0_15px_40px_rgba(0,0,0,0.6)] relative overflow-hidden group`}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className={`w-full h-full min-h-[220px] p-6 sm:p-7 rounded-3xl bg-white/[0.03] backdrop-blur-3xl border border-white/15 ${cat.accent} hover:bg-white/[0.06] transition-all duration-300 cursor-pointer shadow-[0_15px_40px_rgba(0,0,0,0.4)] relative overflow-hidden group flex flex-col justify-between [transform-style:preserve-3d]`}
           >
-            <div className={`absolute inset-0 bg-gradient-to-br ${cat.gradient} opacity-70 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+            {/* Top Border Accent Line */}
+            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
             
-            <div className="relative z-10">
-              <span className="text-[9px] uppercase tracking-[0.3em] text-[#89AACC] mb-1.5 block font-semibold">
-                {cat.subtitle}
-              </span>
-              <h3 className="text-xl md:text-2xl font-display italic text-text-primary mb-4">
-                {cat.title}
-              </h3>
+            {/* Hover Spotlight Glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+            <div className="relative z-10 [transform:translateZ(25px)] flex flex-col h-full justify-between">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className={`w-2 h-2 rounded-full ${cat.dotColor}`} />
+                  <span className="text-[9px] uppercase tracking-[0.3em] text-muted font-bold">
+                    {cat.subtitle}
+                  </span>
+                </div>
+
+                <h3 className="text-xl sm:text-2xl font-display italic text-text-primary mb-5">
+                  {cat.title}
+                </h3>
+              </div>
               
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 pt-2">
                 {cat.skills.map((skill, sIdx) => (
                   <div 
                     key={sIdx} 
-                    className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-black/60 border border-white/10 hover:border-white/30 transition-colors shadow-sm"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/40 border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all duration-300 shadow-sm backdrop-blur-md"
                   >
                     <img 
                       src={skill.url || `https://cdn.simpleicons.org/${skill.icon}/e5e5e5`} 
                       alt={skill.name} 
-                      className="w-3.5 h-3.5 object-contain"
+                      className="w-3.5 h-3.5 object-contain opacity-85 group-hover:opacity-100 transition-opacity"
                       loading="lazy"
                     />
-                    <span className="text-[11px] text-text-primary font-medium tracking-wide">
+                    <span className="text-[11px] text-text-primary/90 font-medium tracking-wide">
                       {skill.name}
                     </span>
                   </div>
