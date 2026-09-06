@@ -26,7 +26,7 @@ const educationData = [
     institution: "Saraswati Vidyalaya & Jr. College",
     location: "Navi Mumbai, Maharashtra",
     description: "Graduated with 94.8% and top academic honors, securing school-wide recognition and leadership accolades.",
-    highlights: ["Percentage: 94.8%", "1st Rank in 10th Grade (School Topper)", "Awarded 'Student of the Year 🎖️'"],
+    highlights: ["Percentage: 94.8%", "1st Rank in 10th Grade (School Topper)", "Awarded 'Student of the Year "],
     borderGlow: "hover:border-white/20"
   }
 ];

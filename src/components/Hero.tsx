@@ -33,24 +33,25 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative w-full h-screen flex flex-col justify-center items-center overflow-hidden" id="home">
+    <section ref={heroRef} className="relative w-full min-h-screen flex flex-col justify-between items-center overflow-hidden pt-28 pb-10" id="home">
       <VideoBackground src={HLS_URL} overlayClasses="bg-black/20" />
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-bg to-transparent z-0" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-bg to-transparent z-0 pointer-events-none" />
 
-      <div className="relative z-10 flex flex-col items-center text-center px-4 mt-16 max-w-3xl">
-        <span className="blur-in text-xs text-muted uppercase tracking-[0.3em] mb-6">
+      {/* Main Content Box */}
+      <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-3xl my-auto">
+        <span className="blur-in text-xs text-muted uppercase tracking-[0.3em] mb-4">
             HELLO THERE, I AM
         </span>
         
-        <h1 className="name-reveal text-5xl md:text-7xl lg:text-8xl font-display italic leading-[0.9] tracking-tight text-text-primary mb-6">
+        <h1 className="name-reveal text-5xl md:text-7xl lg:text-8xl font-display italic leading-[0.9] tracking-tight text-text-primary mb-4">
           Anurag A Pandit
         </h1>
         
-        <p className="blur-in text-lg md:text-xl font-body text-text-primary mb-4 flex items-center gap-2">
+        <p className="blur-in text-lg md:text-xl font-body text-text-primary mb-3 flex items-center gap-2">
           A <span key={roleIndex} className="font-display italic text-text-primary animate-role-fade-in inline-block">{roles[roleIndex]}</span> in building.
         </p>
         
-        <p className="blur-in text-xs md:text-sm text-muted max-w-md mb-8 leading-relaxed">
+        <p className="blur-in text-xs md:text-sm text-muted max-w-md mb-6 leading-relaxed">
           Building ideas into reality, one line at a time. I’m a CSE undergrad @ IIIT Kalyani who loves full-stack development, UI/UX, and problem solving. I build with Python, C, C++, JavaScript & MERN, design with Figma, and constantly explore new technologies.
         </p>
 
@@ -72,9 +73,10 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10">
-        <span className="text-xs text-muted uppercase tracking-[0.2em]">Scroll</span>
-        <div className="w-px h-10 bg-stroke overflow-hidden relative">
+      {/* Scroll Indicator - Flex Flow Managed */}
+      <div className="blur-in relative z-10 flex flex-col items-center gap-2 mt-4 shrink-0">
+        <span className="text-[10px] text-muted uppercase tracking-[0.2em]">Scroll</span>
+        <div className="w-px h-8 bg-stroke overflow-hidden relative">
           <div className="w-full h-full bg-text-primary animate-scroll-down" />
         </div>
       </div>
