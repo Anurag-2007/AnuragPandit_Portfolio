@@ -9,7 +9,7 @@ const navItems = [
     href: 'https://docs.google.com/document/d/1gYlnRoRzAJ4a8jC-AcPOwY0A7dBMXaaQgh-kk1bf1q8/edit?tab=t.0', 
     isExternal: true 
   },
-  { label: 'Photography', href: '/photography', icon: Camera, isExternal: false },
+  { label: 'Photography', href: '/#photography', icon: Camera, isExternal: false },
 ];
 
 export default function Navbar() {
