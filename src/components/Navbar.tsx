@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Briefcase, Clock, FileText, ArrowUpRight } from 'lucide-react';
+import { Camera, ArrowUpRight } from 'lucide-react';
 
 const navItems = [
-  { label: 'Work', href: '/#work', icon: Briefcase, isExternal: false },
-  { label: 'Experience', href: '/#experience', icon: Clock, isExternal: false },
+  { label: 'Work', href: '/#work', isExternal: false },
+  { label: 'Experience', href: '/#experience', isExternal: false },
   { 
     label: 'Resume', 
     href: 'https://docs.google.com/document/d/1gYlnRoRzAJ4a8jC-AcPOwY0A7dBMXaaQgh-kk1bf1q8/edit?tab=t.0', 
-    icon: FileText, 
     isExternal: true 
   },
+  { label: 'Photography', href: '/photography', icon: Camera, isExternal: false },
 ];
 
 export default function Navbar() {
@@ -44,7 +44,8 @@ export default function Navbar() {
         {/* Links with Subtle Separating Lines & Compact Mobile Padding */}
         <div className="flex items-center gap-0.5 sm:gap-1">
           {navItems.map((item, index) => {
-            const commonClasses = "relative group flex items-center text-[10px] sm:text-xs rounded-full px-2 sm:px-4 py-1 sm:py-1.5 text-muted hover:text-text-primary hover:bg-white/10 hover:shadow-[0_0_15px_rgba(137,170,204,0.15)] transition-all duration-300";
+            const Icon = item.icon;
+            const commonClasses = "relative group flex items-center gap-1.5 text-[10px] sm:text-xs rounded-full px-2 sm:px-3 py-1 sm:py-1.5 text-muted hover:text-text-primary hover:bg-white/10 hover:shadow-[0_0_15px_rgba(137,170,204,0.15)] transition-all duration-300";
 
             return (
               <div key={item.label} className="flex items-center">
@@ -57,6 +58,14 @@ export default function Navbar() {
                     className={commonClasses}
                   >
                     <span>{item.label}</span>
+                  </a>
+                ) : Icon ? (
+                  <a
+                    href={item.href}
+                    className={commonClasses}
+                    title={item.label}
+                  >
+                    <Icon size={14} className="text-muted group-hover:text-[#89AACC] transition-colors shrink-0" />
                   </a>
                 ) : (
                   <a
