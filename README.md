@@ -1,75 +1,34 @@
-# React + TypeScript + Vite
+# Futuristic Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-end, futuristic personal portfolio website built with React, Vite, Tailwind CSS, and Framer Motion, featuring cinematic visuals, a custom star-trailing cursor, and a modular architecture.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **Framework:** React, Vite, React Router
+* **Styling:** Tailwind CSS
+* **Animations:** Framer Motion, GSAP
+* **Media & Streaming:** HLS.js (for adaptive video streaming)
+* **Icons:** Lucide React
 
-## React Compiler
+## Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Cinematic Video Background:** Integrated HLS video stream with a smooth, slow "breathe-in" fade and fallback handling.
+* **Custom Cursor & Star Trail:** GPU-accelerated custom arrow pointer paired with a native DOM star-particle trailing effect.
+* **Glassmorphic Navigation:** Responsive floating navbar featuring a breathing blue halo logo and custom glow states.
+* **Photography Gallery:** Programmatic 50-image gallery grid equipped with lazy loading and optimization.
+* **Structured Sections:** Includes Hero, Academic Background, Works/Projects, Achievements, and Footer components.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Follow these instructions to run the project locally.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Make sure you have Node.js installed on your machine.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
 
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/Anurag-2007/AnuragPandit_Portfolio.git](https://github.com/Anurag-2007/AnuragPandit_Portfolio.git)
+   cd AnuragPandit_Portfolio
