@@ -58,8 +58,7 @@ export default function Hero() {
         
         {/* Dynamically fitting inline wrapper with flex layout to eliminate excess spacing */}
         <p className="blur-in text-lg md:text-xl font-body text-text-primary mb-3 inline-flex items-center justify-center gap-[0.3em] flex-wrap">
-          <span>A</span>
-          <span className="inline-flex relative overflow-hidden h-[1.4em] items-center">
+                  <span className="inline-flex relative overflow-hidden h-[1.4em] items-center">
             <AnimatePresence mode="wait">
               <motion.span
                 key={roleIndex}
